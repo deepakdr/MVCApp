@@ -1,0 +1,11 @@
+﻿
+<div id="movieList">
+    @foreach (var item in Model)
+    {
+        <br />
+        <div>
+            <span>@item.Name, @item.Category </span>
+            <div>@item.NumberOfReviews reviews is available</div>
+        </div>
+    }
+</div>

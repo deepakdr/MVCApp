@@ -1,0 +1,19 @@
+﻿@model MvcApp.ViewModel.ExternalRatingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<fieldset>
+    <legend>External Site Info </legend>
+    <div>
+    <div> Received the request at: <b>  @Model.StartTime </b></div> 
+     <div>The request got served at: <b> @Model.EndTime  </b> </div>
+    <div>Top movie of the week from Rotten Tomato: @Model.RottenTomatoRating </div>
+        <div>Top grossing movie of week from IMDB: @Model.IMDB </div>
+
+    </div>
+   
+</fieldset>

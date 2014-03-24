@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MvcApp.ViewModel.MovieReviewViewModel>
+
+<h2>List of movies & their reviews</h2>
+
+@*<form method="get">
+    <input type="text" name="searchterm" />
+    <input type ="submit" value="Search" />
+
+</form>*@
+
+<form method="get" action="@Url.Action("Index")"
+    data-mra-ajax="true" data-mra-target ="#movieList">
+    <input type="search" name="searchTerm" data-mra-autocomplete="@Url.Action("Autocomplete")" />
+    <input type="submit" value="Search By Name" />
+</form>
+
+
+<div>
+    @Html.Partial("_MoviePartial", Model)
+
+</div>
+<div>
+
+    @Html.Action("SmallCache")
+
+</div>

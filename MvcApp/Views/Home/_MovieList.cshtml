@@ -1,0 +1,16 @@
+﻿
+
+<div>
+@foreach (var movie in Model)
+{
+    
+
+    <div>
+   <h3> @Html.Raw(movie.Name)</h3> 
+        <span>@movie.Category, @movie.YearOfRelease  </span>
+       
+        
+        
+    </div>
+}
+    </div>

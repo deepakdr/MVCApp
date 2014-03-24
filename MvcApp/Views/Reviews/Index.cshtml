@@ -1,0 +1,19 @@
+﻿@model MvcApp.Models.Movie
+
+<h2>List of Available Review for @Model.Name</h2>
+<br />
+@foreach (var item in Model.Reviews)
+{
+    <div>
+        <div>Rating: @item.Review</div>
+        <div>Name of Reviewer: @item.ReviewerName</div>
+        <div>Comments: @item.Body</div>
+
+    </div>
+}
+
+<BR />
+@Html.ActionLink("WRITE A REVIEW", "Create", new { movieid = Model.Id })
+
+
+

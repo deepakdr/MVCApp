@@ -1,0 +1,91 @@
+﻿<h2>Listing Movies</h2>
+@section scripts {
+    <script>
+
+        
+
+        $(function () {
+            //When the page loads,
+            //Go to the api and get the list of movies
+
+            var option = {
+                url: 'http://localhost:55063/api/movieservice',
+                type: 'get'
+
+            }
+            $.ajax(option).done(fnRenderData).fail(fnShowError)
+            $(document).on('click', '#edit', fnShowEditSection);
+            $(document).on('click', '#save', fnDoSave);
+
+        });
+
+
+        var fnRenderData = function (data) {
+            //this is the place i need to show the data on my screen
+            var customTemplate = '<table><th>Title </th><th>Category</th>';
+
+            $(data).each(function (index, element) {
+                //this is where i build my UI
+
+                customTemplate = customTemplate +
+                  '<tr data-id=' + element.Id + '>' + '<td>' + element.Name
+                  + '</td>' + '<td>' + element.Category
+                  + '</td><td><input type=button id=edit value=Edit></td> </tr>'
+
+            });
+
+            $('#displayData').append(customTemplate);
+          
+        }
+
+        var fnShowError = function () {
+            alert('Ratzz something went wrong!');
+        }
+
+        var fnShowEditSection = function () {
+            var html = this;
+           
+            var option = {
+                url: 'http://localhost:55063/api/movieservice/'+ $(html).closest('tr').attr('data-id'),
+                type:'get'
+        }
+
+        $.ajax(option).done(fnRenderEdit);
+
+        }
+
+        var fnRenderEdit = function (data) {
+            var editHtmlTemplate = '<table><thead><tr><td>Name</td><td>Category</td></tr></thead><tr><td><input type="text" id="name" required value="' + data.Name + '" /> </td><td><input type="text" id="category" required value="' + data.Category + '" /> </td><td><input type="button" id="save" value="Save" /><input type="hidden" id="id" value="' + data.Id + '" />  </td>    </tr></table>'
+            $('#editSection').append(editHtmlTemplate);
+        }
+
+
+        var fnDoSave = function () {
+
+            var model = {
+                Id: $('#id').val() ,
+                Name: $('#name').val(),
+                Category: $('#category').val() 
+            }
+
+            var option = {
+                url: 'http://localhost:55063/api/movieservice/' + model.Id,
+                type: 'put',
+                data: model
+            }
+
+            $.ajax(option).done(function () { alert('Data Saved Succesfully') });
+        }
+    </script>
+}
+
+<div id="displayData" class="demo">
+
+
+</div>
+
+<div id="editSection">
+
+
+
+</div>
